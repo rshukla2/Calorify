@@ -1,0 +1,106 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for components/SymptomLogModal.tsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> SymptomLogModal.tsx</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>5/5</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">90.54% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>67/74</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">70.58% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>12/17</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>5/5</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line high'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">45x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect, useMemo, useState } from "react";
+import { GLP1_CONTEXT_TAGS, GLP1_SYMPTOMS, GLP1_URGENT_SIGNS } from "../constants";
+import { MealRecord, SymptomEntry } from "../types";
+import { localInputToIso, localTimeZone, symptomSafetyMessage, symptomSafetyTier, toLocalInputValue } from "../utils/glp1";
+type Props={open:boolean;meals:MealRecord[];editing?:SymptomEntry|null;onClose:()=&gt;void;onSave:(v:any)=&gt;SymptomEntry};
+export const SymptomLogModal:React.FC&lt;Props&gt;=({open,meals,editing,onClose,onSave})=&gt;{const [type,setType]=useState("nausea"),[severity,setSeverity]=useState("mild"),[started,setStarted]=useState(""),[ongoing,setOngoing]=useState(true),[ended,setEnded]=useState(""),[details,setDetails]=useState(false),[intensity,setIntensity]=useState(""),[episodes,setEpisodes]=useState("1"),[eat,setEat]=useState(false),[drink,setDrink]=useState(false),[sleep,setSleep]=useState(false),[activity,setActivity]=useState(false),[meal,setMeal]=useState(""),[tags,setTags]=useState&lt;string[]&gt;([]),[urgent,setUrgent]=useState&lt;string[]&gt;([]),[concerned,setConcerned]=useState(false),[notes,setNotes]=useState(""),[notice,setNotice]=useState&lt;number|null&gt;(null);
+useEffect(()=&gt;{setType(editing?.symptomType||"nausea");setSeverity(editing?.severity||"mild");setStarted(toLocalInputValue(editing?.startedAt));setOngoing(editing?.isOngoing??true);setEnded(editing?.endedAt?toLocalInputValue(editing.endedAt):"");setIntensity(editing?.<span class="branch-0 cbranch-no" title="branch not covered" >intensity?.toString()</span>||"");setEpisodes(editing?.episodeCount?.toString()||"1");setEat(!!editing?.affectedEating);setDrink(!!editing?.affectedDrinking);setSleep(!!editing?.affectedSleep);setActivity(!!editing?.affectedDailyActivity);setMeal(editing?.relatedMealId||"");setTags(editing?.contextTags||[]);setUrgent(editing?.urgentSigns||[]);setConcerned(!!editing?.userConcerned);setNotes(editing?.notes||"");setDetails(!!editing);setNotice(null)},[open,editing]);const tier=useMemo(()=&gt;symptomSafetyTier({severity:severity as any,urgentSigns:urgent,affectedEating:eat,affectedDrinking:drink,affectedDailyActivity:activity,isOngoing:ongoing,contextTags:tags,userConcerned:concerned}),[severity,urgent,eat,drink,activity,ongoing,tags,concerned]);if(!open)<span class="branch-0 cbranch-no" title="branch not covered" >return null;c</span>onst save=()=&gt;{const found=GLP1_SYMPTOMS.find(x=&gt;x[0]===type);const entry={id:<span class="branch-0 cbranch-no" title="branch not covered" >editing?.id,s</span>ymptomType:type,symptomLabel:found?.[1<span class="branch-0 cbranch-no" title="branch not covered" >]||type,s</span>tartedAt:localInputToIso(started),endedAt:ongoing||!ended?null:localInputToIso(ended),recordedTimeZone:localTimeZone(),isOngoing:ongoing,severity,intensity:intensity?Number(intensity):null,episodeCount:episodes?Number(episodes<span class="branch-0 cbranch-no" title="branch not covered" >):null,a</span>ffectedEating:eat,affectedDrinking:drink,affectedSleep:sleep,affectedDailyActivity:activity,relatedMealId:meal||null,contextTags:tags,urgentSigns:urgent,userConcerned:concerned,notes:notes||null};if(tier&gt;1&amp;&amp;notice===null){setNotice(tier);return}onSave(entry);onClose()};const toggle=(v:string,a:string[],s:(x:string[])=&gt;void)=&gt;s(a.includes(v<span class="branch-0 cbranch-no" title="branch not covered" >)?a.filter(x=&gt;x!==v):[</span>...a,v]);return &lt;div className="fixed inset-0 z-50 bg-slate-950/60 p-4 overflow-auto flex items-center justify-center"&gt;&lt;div className="bg-white rounded-3xl p-5 w-full max-w-xl space-y-4 max-h-[92vh] overflow-auto"&gt;&lt;h2 className="text-lg font-extrabold"&gt;{editing?"Edit":"Log"} symptom&lt;/h2&gt;&lt;div className="grid sm:grid-cols-2 gap-3"&gt;&lt;label className="text-xs font-semibold"&gt;Symptom&lt;select value={type} onChange={<span class="fstat-no" title="function not covered" >e=&gt;setType(e.target.value)} c</span>lassName="field"&gt;{GLP1_SYMPTOMS.map(([v,l])=&gt;&lt;option value={v} key={v}&gt;{l}&lt;/option&gt;)}&lt;/select&gt;&lt;/label&gt;&lt;label className="text-xs font-semibold"&gt;Severity&lt;select value={severity} onChange={<span class="fstat-no" title="function not covered" >e=&gt;setSeverity(e.target.value)} c</span>lassName="field"&gt;&lt;option value="mild"&gt;Mild — noticeable, activities unaffected&lt;/option&gt;&lt;option value="moderate"&gt;Moderate — interfered with activities&lt;/option&gt;&lt;option value="severe"&gt;Severe — significantly disruptive&lt;/option&gt;&lt;/select&gt;&lt;/label&gt;&lt;label className="text-xs font-semibold"&gt;Start date and time&lt;input required type="datetime-local" value={started} onChange={<span class="fstat-no" title="function not covered" >e=&gt;setStarted(e.target.value)} c</span>lassName="field"/&gt;&lt;/label&gt;&lt;label className="text-xs font-semibold flex items-end pb-3 gap-2"&gt;&lt;input type="checkbox" checked={ongoing} onChange={e=&gt;setOngoing(e.target.checked)}/&gt; Still ongoing&lt;/label&gt;{!ongoing&amp;&amp;&lt;label className="text-xs font-semibold"&gt;End date and time&lt;input type="datetime-local" value={ended} onChange={e=&gt;setEnded(e.target.value)} className="field"/&gt;&lt;/label&gt;}&lt;/div&gt;&lt;button onClick={()=&gt;setDetails(!details)} className="text-sm font-bold text-violet-700"&gt;{details?"Hide":"Add"} details&lt;/button&gt;{details&amp;&amp;&lt;div className="space-y-4 border-t pt-4"&gt;&lt;div className="grid sm:grid-cols-3 gap-3"&gt;&lt;label className="text-xs font-semibold"&gt;Intensity (0–10)&lt;input type="number" min="0" max="10" value={intensity} onChange={e=&gt;setIntensity(e.target.value)} className="field"/&gt;&lt;/label&gt;&lt;label className="text-xs font-semibold"&gt;Episode count&lt;input type="number" min="1" value={episodes} onChange={<span class="fstat-no" title="function not covered" >e=&gt;setEpisodes(e.target.value)} c</span>lassName="field"/&gt;&lt;/label&gt;&lt;label className="text-xs font-semibold"&gt;Closest meal&lt;select value={meal} onChange={e=&gt;setMeal(e.target.value)} className="field"&gt;&lt;option value=""&gt;Not linked&lt;/option&gt;{meals.map(m=&gt;&lt;option value={m.id} key={m.id}&gt;{m.mealType} · {m.mealStartedAt?new Date(m.mealStartedAt).toLocaleString(<span class="branch-0 cbranch-no" title="branch not covered" >):"time not recorded"}&lt;</span>/option&gt;)}&lt;/select&gt;&lt;/label&gt;&lt;/div&gt;&lt;fieldset&gt;&lt;legend className="text-xs font-bold mb-2"&gt;Affected&lt;/legend&gt;&lt;div className="flex flex-wrap gap-4 text-sm"&gt;{[["Eating",eat,setEat],["Drinking",drink,setDrink],["Sleep",sleep,setSleep],["Daily activity",activity,setActivity]].map(([l,v,s]:any)=&gt;&lt;label key={l}&gt;&lt;input type="checkbox" checked={v} onChange={e=&gt;s(e.target.checked)}/&gt; {l}&lt;/label&gt;)}&lt;/div&gt;&lt;/fieldset&gt;&lt;fieldset&gt;&lt;legend className="text-xs font-bold mb-2"&gt;Context tags&lt;/legend&gt;&lt;div className="flex flex-wrap gap-1"&gt;{GLP1_CONTEXT_TAGS.map(x=&gt;&lt;button type="button" aria-pressed={tags.includes(x)} onClick={()=&gt;toggle(x,tags,setTags)} key={x} className={`px-2 py-1 rounded-lg text-xs ${tags.includes(x)?"bg-violet-600 text-white":"bg-slate-100"}`}&gt;{x}&lt;/button&gt;)}&lt;/div&gt;&lt;/fieldset&gt;&lt;fieldset&gt;&lt;legend className="text-xs font-bold mb-1"&gt;Potentially urgent signs&lt;/legend&gt;&lt;p className="text-xs text-slate-500 mb-2"&gt;Select only signs you experienced. These choices display safety guidance but do not diagnose a condition.&lt;/p&gt;&lt;div className="space-y-1"&gt;{GLP1_URGENT_SIGNS.map(x=&gt;&lt;label className="block text-xs" key={x}&gt;&lt;input type="checkbox" checked={urgent.includes(x)} onChange={()=&gt;toggle(x,urgent,setUrgent)}/&gt; {x}&lt;/label&gt;)}&lt;/div&gt;&lt;/fieldset&gt;&lt;label className="text-xs block"&gt;&lt;input type="checkbox" checked={concerned} onChange={<span class="fstat-no" title="function not covered" >e=&gt;setConcerned(e.target.checked)}/</span>&gt; This entry is concerning to me&lt;/label&gt;&lt;label className="text-xs font-semibold block"&gt;Notes&lt;textarea value={notes} onChange={e=&gt;setNotes(e.target.value)} className="field"/&gt;&lt;/label&gt;&lt;/div&gt;}{notice&amp;&amp;&lt;div role="alert" aria-live="assertive" className={`p-4 border rounded-xl text-sm ${notice===3?"bg-rose-50 border-rose-300 text-rose-900":"bg-amber-50 border-amber-300 text-amber-900"}`}&gt;&lt;strong&gt;Safety notice&lt;/strong&gt;&lt;p&gt;{symptomSafetyMessage(notice as 2|3)}&lt;/p&gt;&lt;p className="mt-1 text-xs"&gt;You can still save this entry unchanged.&lt;/p&gt;&lt;/div&gt;}&lt;p className="text-xs text-slate-500"&gt;Severity descriptions organize your records and are not medical triage definitions.&lt;/p&gt;&lt;div className="flex justify-end gap-2"&gt;&lt;button onClick={onClose} className="px-4 py-2 bg-slate-100 rounded-xl"&gt;Cancel&lt;/button&gt;&lt;button disabled={!started} onClick={save} className="px-4 py-2 bg-violet-600 disabled:opacity-50 text-white font-bold rounded-xl"&gt;{notice?"Save entry":"Save"}&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;};
+&nbsp;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2026-08-02T06:08:11.238Z
+            </div>
+        <script src="../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
+    </body>
+</html>
+    
