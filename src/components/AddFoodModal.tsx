@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { X, Sparkles, Camera, PenTool, Lock } from "lucide-react";
 import { AIFoodEstimate, AIPhotoNutritionEstimate, FoodLogEntry, MealRecord, MealType } from "../types";
+import { isDemoMode } from "../services/demoMode";
 import { localInputToIso, localTimeZone, toLocalInputValue } from "../utils/glp1";
 import { AIFoodSearchForm } from "./AIFoodSearchForm";
 import { AIPhotoUploadForm } from "./AIPhotoUploadForm";
@@ -103,6 +104,7 @@ export const AddFoodModal: React.FC<AddFoodModalProps> = ({
           <div>
             <h2 className="font-bold text-slate-900 text-lg sm:text-xl flex items-center gap-2">
               <span>Log Food Item</span>
+              {isDemoMode && <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-amber-700 bg-amber-100 border border-amber-200 rounded-full">Demo mode</span>}
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">
               Choose an AI estimation method or enter details manually
@@ -217,7 +219,7 @@ export const AddFoodModal: React.FC<AddFoodModalProps> = ({
               <div className="pt-2 text-[11px] text-slate-400 text-center flex items-center justify-center gap-1">
                 <Lock className="w-3 h-3 text-slate-400 shrink-0" />
                 <span>
-                  AI features send submitted food text or images to Gemini for analysis.
+                  {isDemoMode ? "Demo mode: AI results are sample responses. Nothing is sent anywhere." : "AI features send submitted food text or images to Gemini for analysis."}
                 </span>
               </div>
             </>

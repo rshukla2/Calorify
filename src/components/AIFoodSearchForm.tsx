@@ -3,6 +3,7 @@ import { Sparkles, Search, History, AlertCircle, ArrowRight, PenTool } from "luc
 import { AIFoodEstimate, AIRequestStatus } from "../types";
 import { aiService } from "../services/aiService";
 import { storageService } from "../services/storageService";
+import { isDemoMode } from "../services/demoMode";
 
 interface AIFoodSearchFormProps {
   onEstimateReceived: (estimate: AIFoodEstimate, query: string) => void;
@@ -105,7 +106,7 @@ export const AIFoodSearchForm: React.FC<AIFoodSearchFormProps> = ({
         <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center gap-3">
           <div className="w-5 h-5 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin shrink-0" />
           <div>
-            <p className="text-sm font-semibold text-emerald-900">Estimating nutrition with Gemini AI...</p>
+            <p className="text-sm font-semibold text-emerald-900">{isDemoMode ? "Estimating nutrition (demo)..." : "Estimating nutrition with Gemini AI..."}</p>
             <p className="text-xs text-emerald-700">Analyzing portion, macros, and common cooking methods</p>
           </div>
         </div>

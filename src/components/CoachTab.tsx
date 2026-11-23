@@ -14,6 +14,7 @@ import {
 import { ChatMessage, NutritionChatContext, UserProfile } from "../types";
 import { aiService } from "../services/aiService";
 import { storageService } from "../services/storageService";
+import { isDemoMode } from "../services/demoMode";
 
 export interface DailyLogSummary {
   totalCalories: number;
@@ -175,7 +176,10 @@ export const CoachTab: React.FC<CoachTabProps> = ({
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="font-bold text-base sm:text-lg">Calorify AI Coach</h2>
+              <div className="flex items-center gap-2">
+                <h2 className="font-bold text-base sm:text-lg">Calorify AI Coach</h2>
+                {isDemoMode && <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-amber-700 bg-amber-100 border border-amber-200 rounded-full">Demo mode: sample replies</span>}
+              </div>
               <p className="text-xs text-slate-300">
                 Personalized guidance powered by your profile & live daily logs
               </p>

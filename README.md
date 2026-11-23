@@ -13,7 +13,7 @@ A mobile-first calorie and macro tracker built with React, TypeScript, Vite and 
 - **AI features (needs the backend):** natural-language food estimates, meal-photo analysis, and an AI nutrition coach, powered by Google Gemini through a small Express server.
 - **Private by design:** all data stays in your browser's `localStorage`. There is no account and no cloud sync.
 
-> The GitHub Pages demo is a static build, so the AI features are turned off there and show a notice. Manual logging, goals, history and the GLP-1 tools all work. To try the AI features, run the app locally with a Gemini API key.
+> The GitHub Pages demo is a static build that runs in **demo mode** (`VITE_DEMO_MODE=true`). There, the AI features return realistic sample responses instead of calling Gemini, and a "Demo mode" badge says so. Nothing is sent anywhere. Run the app locally with a Gemini API key for live AI.
 
 ## Tech stack
 

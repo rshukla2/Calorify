@@ -5,6 +5,8 @@ import {
   ChatResponse,
   NutritionChatContext,
 } from "../types";
+import { isDemoMode } from "./demoMode";
+import { demoAiService } from "./demoAiService";
 
 export class AIServiceError extends Error {
   isRateLimit?: boolean;
@@ -45,6 +47,7 @@ export const aiService = {
    * Search food nutrition by natural language query
    */
   async estimateFood(query: string): Promise<AIFoodEstimate> {
+    if (isDemoMode) return demoAiService.estimateFood(query);
     const { response, data } = await postJson("/api/ai/estimate-food", { query });
 
     if (!response.ok) {
@@ -61,6 +64,7 @@ export const aiService = {
    * Analyze food photo and return multi-item nutrition estimate
    */
   async analyzeFoodImage(imageBase64: string, mimeType: string = "image/jpeg"): Promise<AIPhotoNutritionEstimate> {
+    if (isDemoMode) return demoAiService.analyzeFoodImage(imageBase64, mimeType);
     const { response, data } = await postJson("/api/ai/analyze-food-image", { imageBase64, mimeType });
 
     if (!response.ok) {
@@ -81,6 +85,7 @@ export const aiService = {
     context: NutritionChatContext,
     history: ChatMessage[] = []
   ): Promise<ChatResponse> {
+    if (isDemoMode) return demoAiService.sendChatMessage(message, context, history);
     const formattedHistory = history.map((msg) => ({
       role: msg.role === "user" ? "user" : "model",
       text: msg.content,

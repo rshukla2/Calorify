@@ -174,7 +174,7 @@ export const AIFoodEstimateReviewScreen: React.FC<AIFoodEstimateReviewScreenProp
               Portion Quantity (TypeScript Scaled)
             </span>
             <span className="text-xs text-emerald-700 font-medium">
-              Base: 1 = {estimate.calories} kcal
+              Base: {estimate.baseServingAmount || 1} {estimate.baseServingUnit || "serving"} = {estimate.calories} kcal
             </span>
           </div>
 

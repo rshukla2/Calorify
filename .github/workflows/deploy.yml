@@ -27,6 +27,8 @@ jobs:
       - run: npm run lint
       - run: npm test
       - run: npx vite build
+        env:
+          VITE_DEMO_MODE: "true"
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:
