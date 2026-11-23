@@ -47,19 +47,19 @@ export const ACTIVITY_OPTIONS: ActivityOption[] = [
   {
     value: "lightly_active",
     label: "Lightly Active",
-    description: "Light exercise 1–3 days per week",
+    description: "Light exercise 1-3 days per week",
     multiplier: 1.375,
   },
   {
     value: "moderately_active",
     label: "Moderately Active",
-    description: "Moderate exercise 3–5 days per week",
+    description: "Moderate exercise 3-5 days per week",
     multiplier: 1.55,
   },
   {
     value: "very_active",
     label: "Very Active",
-    description: "Hard exercise 6–7 days per week",
+    description: "Hard exercise 6-7 days per week",
     multiplier: 1.725,
   },
   {

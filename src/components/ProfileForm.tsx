@@ -504,7 +504,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
 
         <div className="flex items-start gap-2 pt-1 text-[11px] text-emerald-200/90 leading-relaxed">
           <Info className="w-4 h-4 shrink-0 text-emerald-400 mt-0.5" />
-          <span>General wellness estimate — not medical advice.</span>
+          <span>General wellness estimate, not medical advice.</span>
         </div>
       </div>
 

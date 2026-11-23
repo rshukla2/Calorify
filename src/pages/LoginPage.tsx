@@ -75,7 +75,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
 
         <div className="pt-2 border-t border-slate-100 flex items-center justify-center gap-2 text-xs text-slate-400">
           <ShieldCheck className="w-4 h-4 text-emerald-600" />
-          <span>Private local session — No cloud login required</span>
+          <span>Private local session. No cloud login required.</span>
         </div>
       </div>
     </div>

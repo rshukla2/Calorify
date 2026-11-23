@@ -15,8 +15,8 @@ const baseProps = () => ({ isOpen:true,onClose:vi.fn(),onSaveEntry:vi.fn(),onSav
 async function enableContext() {
   await userEvent.click(screen.getByLabelText("Add GLP-1 meal timing and appetite context"));
   await userEvent.selectOptions(screen.getByLabelText("Meal size"), "small");
-  await userEvent.type(screen.getByLabelText("Hunger before (1–5)"), "3");
-  await userEvent.type(screen.getByLabelText("Fullness after (1–5)"), "4");
+  await userEvent.type(screen.getByLabelText("Hunger before (1-5)"), "3");
+  await userEvent.type(screen.getByLabelText("Fullness after (1-5)"), "4");
 }
 
 describe("AddFoodModal shared GLP-1 meal context", () => {

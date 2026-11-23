@@ -28,6 +28,18 @@ npm install
 GEMINI_API_KEY=your_key_here npm run dev   # http://localhost:3000 (the key is optional; it enables AI features)
 ```
 
+### AI usage limits
+
+The Express server protects the Gemini API key with in-memory rate limits on all `/api/ai/*` routes. You can change them with environment variables:
+
+| Variable | Default | Meaning |
+|---|---|---|
+| `AI_RATE_PER_MINUTE` | 5 | requests per minute per IP |
+| `AI_RATE_PER_DAY` | 30 | requests per day per IP |
+| `AI_GLOBAL_PER_DAY` | 150 | requests per day across all users |
+
+The AI coach is limited to nutrition, fitness and app questions. It declines off-topic requests such as coding, homework or general chat, and it ignores attempts to override its instructions. Chat messages are capped at 500 characters, with the last 10 history turns kept.
+
 ## Tests
 
 ```bash

@@ -61,8 +61,8 @@ test("creates shared meal context and displays it in the timeline", async ({ pag
   await page.getByRole("button", { name: "Log Food" }).click();
   await page.getByLabel("Add GLP-1 meal timing and appetite context").check();
   await page.getByLabel("Meal size").selectOption("small");
-  await page.getByLabel("Hunger before (1–5)").fill("3");
-  await page.getByLabel("Fullness after (1–5)").fill("4");
+  await page.getByLabel("Hunger before (1-5)").fill("3");
+  await page.getByLabel("Fullness after (1-5)").fill("4");
   await page.getByRole("button", { name: "Manual" }).click();
   await page.getByLabel(/Food Name/).fill("Oatmeal");
   await page.getByLabel(/Calories/).fill("300");

@@ -55,7 +55,7 @@ describe("SymptomLogModal", () => {
     await u.click(screen.getByLabelText("Still ongoing"));
     expect(screen.getByLabelText("End date and time")).toBeVisible();
     await u.type(screen.getByLabelText("End date and time"), "2026-08-01T12:00");
-    await u.clear(screen.getByLabelText("Intensity (0–10)")); await u.type(screen.getByLabelText("Intensity (0–10)"), "6");
+    await u.clear(screen.getByLabelText("Intensity (0-10)")); await u.type(screen.getByLabelText("Intensity (0-10)"), "6");
     await u.selectOptions(screen.getByLabelText("Closest meal"), "meal_1");
     await u.click(screen.getByRole("button", { name: "After a small meal" }));
     await u.type(screen.getByLabelText("Notes"), "User-authored context");
@@ -71,7 +71,7 @@ describe("SymptomLogModal", () => {
     renderModal({ editing: symptomEntry({ endedAt: "2026-08-01T16:00:00Z", isOngoing: false }), onClose });
     expect(screen.getByRole("heading", { name: "Edit symptom" })).toBeVisible();
     await user().click(screen.getByRole("button", { name: "Hide details" }));
-    expect(screen.queryByLabelText("Intensity (0–10)")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("Intensity (0-10)")).not.toBeInTheDocument();
     await user().click(screen.getByRole("button", { name: "Cancel" }));
     expect(onClose).toHaveBeenCalledOnce();
   });
