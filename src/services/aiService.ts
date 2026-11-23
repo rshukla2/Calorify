@@ -15,18 +15,37 @@ export class AIServiceError extends Error {
   }
 }
 
+const AI_UNAVAILABLE_MESSAGE =
+  "AI features need the Calorify backend server, which isn't running in this demo. You can still add food manually.";
+
+async function postJson(url: string, body: unknown): Promise<{ response: Response; data: any }> {
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+  } catch {
+    throw new AIServiceError(AI_UNAVAILABLE_MESSAGE);
+  }
+
+  let data: any;
+  try {
+    data = await response.json();
+  } catch {
+    // Static hosting (e.g. GitHub Pages) returns HTML 404/405 pages for /api routes.
+    throw new AIServiceError(AI_UNAVAILABLE_MESSAGE);
+  }
+  return { response, data };
+}
+
 export const aiService = {
   /**
    * Search food nutrition by natural language query
    */
   async estimateFood(query: string): Promise<AIFoodEstimate> {
-    const response = await fetch("/api/ai/estimate-food", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query }),
-    });
-
-    const data = await response.json();
+    const { response, data } = await postJson("/api/ai/estimate-food", { query });
 
     if (!response.ok) {
       throw new AIServiceError(
@@ -42,13 +61,7 @@ export const aiService = {
    * Analyze food photo and return multi-item nutrition estimate
    */
   async analyzeFoodImage(imageBase64: string, mimeType: string = "image/jpeg"): Promise<AIPhotoNutritionEstimate> {
-    const response = await fetch("/api/ai/analyze-food-image", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ imageBase64, mimeType }),
-    });
-
-    const data = await response.json();
+    const { response, data } = await postJson("/api/ai/analyze-food-image", { imageBase64, mimeType });
 
     if (!response.ok) {
       throw new AIServiceError(
@@ -73,17 +86,11 @@ export const aiService = {
       text: msg.content,
     }));
 
-    const response = await fetch("/api/ai/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    const { response, data } = await postJson("/api/ai/chat", {
         message,
         context,
         history: formattedHistory,
-      }),
-    });
-
-    const data = await response.json();
+      });
 
     if (!response.ok) {
       throw new AIServiceError(

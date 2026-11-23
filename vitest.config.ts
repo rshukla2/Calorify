@@ -5,6 +5,8 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: "jsdom",
+    // Node 25+ ships its own localStorage global that shadows jsdom's; turn it off.
+    poolOptions: { forks: { execArgv: ["--no-experimental-webstorage"] } },
     setupFiles: ["./src/test/setup.ts"],
     exclude: ["e2e/**", "node_modules/**", "dist/**"],
     clearMocks: true,

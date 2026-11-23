@@ -5,6 +5,8 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+    // Relative asset paths so the build works under GitHub Pages' /Calorify/ subpath.
+    base: './',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
